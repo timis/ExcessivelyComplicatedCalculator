@@ -1,0 +1,18 @@
+<form id="userForm" method="POST">
+    <div class="form-group required">
+        <label for="operand1" class='control-label'>Operand1</label>
+        <input type="number" step="any" class="form-control" id="operand1" name="operand1" aria-describedby="operandHelp" value={{{form.operand1}}} required>
+    </div>
+    <div class="form-group required">
+        <label for="operation" class='control-label'>Operation</label>
+        <input type="text" class="form-control" id="operation" name="operation" aria-describedby="operationHelp" value={{{form.operation}}} required>
+    </div>
+    <div class="form-group required">
+        <label for="operand2" class='control-label'>Operand2</label>
+        <input type="number" step="any" class="form-control" id="operand2" name = "operand2" value={{{form.operand2}}} required>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+{{#if answer}}
+    <strong>Answer: {{answer}}</strong>
+{{/if}}
