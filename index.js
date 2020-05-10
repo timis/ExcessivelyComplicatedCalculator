@@ -70,6 +70,28 @@ app.route('/')
         }
     });
 
+app.route('/calculator')
+    .get((req, res) => {
+        res.status(200).render('calculator');
+    })
+    .post((req, res) => {
+        // Acquire the new inputs
+        let userInput = req.body.userInput;
+        
+        // Re-render the values the user provided
+        res.locals.form = {
+            "userInput": userInput,
+        };
+        // The addons can throw errors, so catch them
+        try {
+            let answer = addon.calculate(userInput);
+            res.locals.answer = answer;
+        } catch (e){
+            res.locals.alert = {"title": "Operation Error", "message": e};
+        }
+        res.render('calculator');
+    });
+
 
 app.listen(3000, () => {
     console.log('express app running at http://localhost:3000/')

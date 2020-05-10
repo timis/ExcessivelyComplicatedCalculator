@@ -1,0 +1,10 @@
+<form id="userForm" method="POST">
+    <div class="form-group required">
+        <label for="operand1" class='control-label'>Input</label>
+        <input type="text" step="any" class="form-control" id="userInput" name="userInput" aria-describedby="operandHelp" value={{{form.userInput}}} required>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+{{#if answer}}
+    <strong>Answer: {{answer}}</strong>
+{{/if}}

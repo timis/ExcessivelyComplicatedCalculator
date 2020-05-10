@@ -1,6 +1,33 @@
 #include <napi.h>
+#include <string>
+#include <iostream>
+#include "Parser.h"
 
 using namespace Napi;
+
+Value Calculator(const CallbackInfo &args){
+    Env env = args.Env();
+    if(args.Length() != 1){
+        TypeError::New(env,"Wrong number of arguments").ThrowAsJavaScriptException();
+        return env.Null();
+    }       
+
+    if(!args[0].IsString()){
+        TypeError::New(env, "Wrong argument type").ThrowAsJavaScriptException();
+        return env.Null();
+    }
+    std::string userInput = std::string(args[0].ToString());
+    Parser p;
+    AST* tree = p.parse(userInput);
+    double evaluated = 0.0;
+    if(tree == NULL){
+        TypeError::New(env, "Could not evaluate the AST").ThrowAsJavaScriptException();
+    } else {
+        evaluated = tree->eval();
+    }
+    cout << userInput << " = " << evaluated << endl;
+    return Number::New(env,evaluated);
+}
 
 Value Add(const CallbackInfo &args){
     Env env = args.Env();
@@ -147,6 +174,7 @@ Object Initialize(Env env, Object exports){
     exports.Set(String::New(env,"divide"), Function::New(env,Divide));
     exports.Set(String::New(env,"mod"), Function::New(env,Mod));
     exports.Set(String::New(env,"length"), Function::New(env, FileLength));
+    exports.Set(String::New(env,"calculate"), Function::New(env, Calculator));
     return exports;
     // NODE_SET_METHOD(exports,"add",Add);
     // NODE_SET_METHOD(exports,"minus",Minus);
