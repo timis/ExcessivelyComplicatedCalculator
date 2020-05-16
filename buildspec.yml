@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+  build:
+    commands:
+      - echo Building the Go code...
+      - echo Building the Node code...
+      - npm install
+      - node-gyp configure
+      - node-gyp build
+artifacts:
+  secondary-artifacts:
+    nodejs_artifacts:
+      files:
+        - index.js
+        - package.json
