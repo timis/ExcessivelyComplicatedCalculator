@@ -6,7 +6,7 @@ phases:
       nodejs: 10
   build:
     commands:
-      - echo Building the Go code...
+      - apt-get update && apt-get install -y lcov
       - echo Building the Node code...
       - npm install
       - node-gyp configure
