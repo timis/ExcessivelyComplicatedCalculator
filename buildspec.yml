@@ -8,7 +8,7 @@ phases:
     commands:
       - yum update -y && yum install -y lcov
       - echo Building the Node code...
-      - npm install
+      - npm install -g
       - node-gyp configure
       - node-gyp build
 artifacts:
