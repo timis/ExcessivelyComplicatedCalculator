@@ -13,8 +13,6 @@ phases:
       - node-gyp configure
       - node-gyp build
 artifacts:
-  secondary-artifacts:
-    nodejs_artifacts:
-      files:
-        - index.js
-        - package.json
+  files:
+    - index.js
+    - package.json
