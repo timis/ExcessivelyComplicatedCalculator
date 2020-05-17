@@ -6,7 +6,7 @@ phases:
       nodejs: 10
   build:
     commands:
-      - yum update && yum install -y lcov
+      - yum update -y && yum install -y lcov
       - echo Building the Node code...
       - npm install
       - node-gyp configure
